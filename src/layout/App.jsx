@@ -24,14 +24,20 @@ function App() {
 
   return (
     <>
-      <div>Bienbenidoa Arti House Imagen Generator</div>
-      <nav>
-        <ul>
-          <li>ARTI-GI</li>
+      <p className="arti-title uk-text-center ">
+        Bienvenido a Arti House Imagen Generator
+      </p>
+      <nav className="arti-navbar">
+        <ul className="uk-navbar-nav">
+          <li>
+            <a href="/">Home</a>
+          </li>
+          <li>
+            <a href="/about">About</a>
+          </li>
         </ul>
       </nav>
-      <h1>Generador de imagenes</h1>
-      <p>Genera una imagen con el texto que ingreses y estilo que eligas </p>
+      <p>Genera una imagen con el texto que ingreses y estilo que eligas</p>
 
       <input
         type="text"

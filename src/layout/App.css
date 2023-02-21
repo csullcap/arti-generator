@@ -1,3 +1,17 @@
+.arti-title {
+  margin-bottom: 10px;
+}
+
+.arti-navbar {
+  margin-bottom: 10px;
+  border-top: 1px solid #e5e5e5;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.uk-navbar-nav > li > a {
+  min-height: 60px;
+}
+
 .option-imagen-style {
   object-fit: cover;
   object-position: center;
