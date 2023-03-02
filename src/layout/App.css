@@ -3,29 +3,24 @@
 }
 
 .arti-navbar {
-  margin-bottom: 10px;
   border-top: 1px solid #e5e5e5;
   border-bottom: 1px solid #e5e5e5;
 }
 
+.arti-navbar > ul {
+  row-gap: 0px;
+  column-gap: 0px;
+}
+
 .uk-navbar-nav > li > a {
   min-height: 60px;
+  padding: 0 20px;
 }
 
-.option-imagen-style {
-  object-fit: cover;
-  object-position: center;
+.uk-navbar-nav > li > a:hover {
+  background-color: #f5f5f5;
 }
 
-.option-imagen-style img {
-  cursor: pointer;
-  width: 50px;
-  height: 50px;
-}
-
-.option-imagen-style input[type="radio"]:checked + img {
-  border: 2px solid #000;
-}
-.option-imagen-style input[type="radio"] label {
-  z-index: 999;
+.style-selected {
+  border: red 1px solid;
 }

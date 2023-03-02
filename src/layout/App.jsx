@@ -10,7 +10,7 @@ function App() {
     []
   );
   const [textGenerator, setTextGenerator] = useState("");
-  const [style, setStyle] = useState("1");
+  const [style, setStyle] = useState(1);
   const [imgGenerated, setImgGenerated] = useState("");
 
   const generarImagen = () => {
@@ -30,65 +30,106 @@ function App() {
       <nav className="arti-navbar">
         <ul className="uk-navbar-nav">
           <li>
-            <a href="/">Home</a>
-          </li>
-          <li>
-            <a href="/about">About</a>
+            {/*logo*/}
+            <a href="/">
+              <img src="/icon.webp" alt="logo" height="40px" width="40px" />
+              {"    "} Arti-Generator
+            </a>
           </li>
         </ul>
       </nav>
-      <p>Genera una imagen con el texto que ingreses y estilo que eligas</p>
+      <div className="uk-container uk-padding">
+        <div
+          className="uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@s uk-margin"
+          data-uk-grid
+        >
+          <div className="uk-padding">
+            <p>
+              Genera una imagen con el texto que ingreses y estilo que eligas
+            </p>
+            <input
+              className="uk-input"
+              type="text"
+              value={textGenerator}
+              onChange={(e) => setTextGenerator(e.target.value)}
+            />
 
-      <input
-        type="text"
-        value={textGenerator}
-        onChange={(e) => setTextGenerator(e.target.value)}
-      />
-      <div>
-        <p>Estilos</p>
-        {/* image styles */}
-        {ImagenStyles.map((item) => {
-          return (
-            <div className="option-imagen-style" key={item.id}>
-              <input
-                type="radio"
-                name="style"
-                value={item.id}
-                onChange={(e) => setStyle(e.target.value)}
-                checked={style === item.id.toString()}
-              />
-              <img src={item.url} alt={item.alt} height="50px" width="50px" />
-              <label htmlFor={item.id}>{item.name}</label>
+            <div>
+              <p>Estilos</p>
+              <ul
+                className="uk-thumbnav uk-padding-small uk-padding-remove-left"
+                data-uk-margin
+              >
+                {/* image styles */}
+                {ImagenStyles.map((item) => {
+                  return (
+                    <li key={item.alt}>
+                      <a
+                        onClick={() => {
+                          setStyle(item.id);
+                        }}
+                      >
+                        <img
+                          className={style === item.id ? "style-selected" : ""}
+                          src={item.url}
+                          width="100"
+                          height="67"
+                          alt={item.name}
+                          style={{
+                            borderRadius: "8px",
+                          }}
+                        />
+                      </a>
+                    </li>
+                  );
+                })}
+              </ul>
             </div>
-          );
-        })}
-      </div>
 
-      <button onClick={() => generarImagen()}>Generar imagen</button>
-
-      {imgGenerated && (
-        <>
-          <hr />
-          <div>
-            <p>Imagen generada</p>
-            <img src={imgGenerated} height="100px" width="100px" />
+            <button
+              className="uk-button uk-button-primary"
+              onClick={() => generarImagen()}
+            >
+              Generar imagen
+            </button>
           </div>
-          <hr />
-        </>
-      )}
-
-      <h2>Imagenes Generadas</h2>
-      <div>
-        <button onClick={() => setImgsGenerated([])}>Limpiar</button>
+          <div className="uk-flex-last@s uk-card-media-right uk-cover-container">
+            {imgGenerated && (
+              <>
+                <div className="uk-padding">
+                  <p>Imagen generada</p>
+                  <img src={imgGenerated} />
+                </div>
+              </>
+            )}
+          </div>
+        </div>
+        <h2>Imagenes Generadas</h2>
+        <button
+          className="uk-button uk-button-danger"
+          onClick={() => {
+            setImgsGenerated([]), setImgGenerated("");
+          }}
+        >
+          Limpiar
+        </button>
       </div>
-      <div>
-        {imgsGenerated.slice(0, 10).map((item, index) => {
-          return (
-            <div key={index}>
-              <img src={item} height="100px" width="100px" />
-            </div>
-          );
-        })}
+      <div className="uk-container uk-padding">
+        <ul
+          className="uk-thumbnav uk-grid-collapse"
+          data-uk-margin
+          data-uk-grid="masonry: true"
+        >
+          {imgsGenerated.slice(0, 10).map((item, index) => {
+            return (
+              <li key={index}>
+                <a>
+                  <img src={item} width="250" height="250" alt="" />
+                </a>
+              </li>
+            );
+          })}
+        </ul>
       </div>
     </>
   );
