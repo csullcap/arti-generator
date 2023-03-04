@@ -24,3 +24,20 @@
 .style-selected {
   border: red 1px solid;
 }
+
+body {
+  background-color: #121212;
+}
+
+p {
+  color: #d2caca;
+}
+
+button {
+  color: rgb(12, 12, 12) !important;
+  background-color: #3d7993 !important;
+}
+
+.container-generator {
+  background-color: #d2caca;
+}
