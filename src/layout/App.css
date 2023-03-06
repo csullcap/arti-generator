@@ -26,7 +26,7 @@
 }
 
 body {
-  background-color: #121212;
+  background-color: rgb(12, 12, 12);
 }
 
 p {
@@ -36,8 +36,10 @@ p {
 button {
   color: rgb(12, 12, 12) !important;
   background-color: #3d7993 !important;
+  border: 2px solid rgb(18, 18, 18) !important;
 }
 
 .container-generator {
-  background-color: #d2caca;
+  box-shadow: #292929 0px 0px 15px 0px, #292929 0px 0px 15px 0px;
+  border-radius: 5px;
 }

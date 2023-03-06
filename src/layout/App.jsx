@@ -26,16 +26,14 @@ function App() {
 
   return (
     <>
-      <p className="arti-title uk-text-center ">
-        Bienvenido a Arti House Imagen Generator
-      </p>
+      <p className="arti-title uk-text-center ">Bienvenido a Arti-Dream</p>
       <nav className="arti-navbar">
         <ul className="uk-navbar-nav">
           <li>
             {/*logo*/}
             <a href="/">
               <img src="/icon.webp" alt="logo" height="40px" width="40px" />
-              Arti-Generator
+              Arti-Dream
             </a>
           </li>
         </ul>
@@ -43,7 +41,7 @@ function App() {
 
       <div className="uk-container uk-container-expand uk-padding">
         <div
-          className="uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@s uk-margin container-generator"
+          className="uk-child-width-1-2@m uk-grid-match uk-grid-small uk-grid container-generator"
           data-uk-grid
         >
           <div className="uk-padding">
@@ -71,8 +69,9 @@ function App() {
                 {/* image styles */}
                 {ImagenStyles.map((item) => {
                   return (
-                    <li key={item.alt} data-uk-tooltip={item.name}>
-                      <a
+                    <li key={item.alt} className="uk-active">
+                      <div
+                        data-uk-tooltip={item.name}
                         onClick={() => {
                           setStyle(item.id);
                         }}
@@ -80,20 +79,23 @@ function App() {
                         <img
                           src={item.url}
                           width="100"
-                          height="67"
+                          height="100"
                           alt={item.name}
                           style={{
-                            borderRadius: "8px",
+                            borderRadius: "10px",
                           }}
                         />
                         {style === item.id && (
-                          <div class="uk-position-cover uk-overlay-default ">
-                            <div class="uk-position-center uk-text-center ">
+                          <div
+                            className="uk-position-cover uk-overlay-default"
+                            style={{ borderRadius: "9px" }}
+                          >
+                            <div className="uk-position-center uk-text-center">
                               <span>{item.name}</span>
                             </div>
                           </div>
                         )}
-                      </a>
+                      </div>
                     </li>
                   );
                 })}
@@ -113,8 +115,9 @@ function App() {
               >
                 {ImagenSizes.map((item) => {
                   return (
-                    <li key={item.alt} data-uk-tooltip={item.name}>
-                      <a
+                    <li key={item.alt}>
+                      <div
+                        data-uk-tooltip={item.name}
                         onClick={() => {
                           setSize(item.id);
                         }}
@@ -131,13 +134,13 @@ function App() {
                           }}
                         />
                         {size === item.id && (
-                          <div class="uk-position-cover uk-overlay-default ">
-                            <div class="uk-position-center uk-text-center ">
+                          <div className="uk-position-cover uk-overlay-default ">
+                            <div className="uk-position-center uk-text-center ">
                               <span>{item.name}</span>
                             </div>
                           </div>
                         )}
-                      </a>
+                      </div>
                     </li>
                   );
                 })}
