@@ -1,9 +1,11 @@
 import "./App.css";
 import { ImagenStyles } from "../Values/ImagenStyles";
-import { randomImages } from "../Values/Images";
+import { randomImages, imagendefault } from "../Values/Images";
 import { ImagenSizes } from "../Values/ImagenSizes";
 import { useState } from "react";
 import useLocalStorage from "../hooks/useLocalStorage";
+import axios from "axios";
+import fileDownload from "js-file-download";
 
 function App() {
   const [imgsGenerated, setImgsGenerated] = useLocalStorage(
@@ -13,7 +15,7 @@ function App() {
   const [textGenerator, setTextGenerator] = useState("");
   const [style, setStyle] = useState(1);
   const [size, setSize] = useState(1);
-  const [imgGenerated, setImgGenerated] = useState("");
+  const [imgGenerated, setImgGenerated] = useState(imagendefault);
 
   const generarImagen = () => {
     if (textGenerator && style) {
@@ -24,20 +26,25 @@ function App() {
     }
   };
 
+  const dowloadImage = async (url, filename) => {
+    const image = await axios.get(url, {
+      responseType: "blob",
+    });
+    fileDownload(image.data, filename);
+  };
+
   return (
     <>
       <p className="arti-title uk-text-center ">Bienvenido a Arti-Dream</p>
-      <nav className="arti-navbar">
-        <ul className="uk-navbar-nav">
-          <li>
-            {/*logo*/}
-            <a href="/">
-              <img src="/icon.webp" alt="logo" height="40px" width="40px" />
-              Arti-Dream
-            </a>
-          </li>
-        </ul>
-      </nav>
+
+      <div class="uk-navbar-container" data-uk-navbar data-uk-sticky>
+        <div class="uk-navbar-center">
+          <a href="/" class="uk-navbar-item uk-logo">
+            <img src="/icon.webp" alt="logo" height="45px" width="45px" />
+            <span className="navbar-logo-name">Arti-Dream</span>
+          </a>
+        </div>
+      </div>
 
       <div className="uk-container uk-container-expand uk-padding">
         <div
@@ -51,7 +58,6 @@ function App() {
             <input
               className="uk-input uk-margin-bottom"
               type="text"
-              value={textGenerator}
               onChange={(e) => setTextGenerator(e.target.value)}
             />
 
@@ -115,7 +121,7 @@ function App() {
               >
                 {ImagenSizes.map((item) => {
                   return (
-                    <li key={item.alt}>
+                    <li key={item.alt} className="uk-active">
                       <div
                         data-uk-tooltip={item.name}
                         onClick={() => {
@@ -155,12 +161,12 @@ function App() {
             </button>
           </div>
 
-          <div className="uk-flex-last@s uk-card-media-right uk-cover-container">
+          <div className="uk-flex-last@s uk-card-media-right ">
             {imgGenerated && (
               <>
-                <div className="uk-padding">
+                <div className="uk-padding uk-padding-remove-left">
                   <p>Imagen generada</p>
-                  <img src={imgGenerated} />
+                  <img src={imgGenerated} className="uk-cover-container" />
                 </div>
               </>
             )}
@@ -168,7 +174,7 @@ function App() {
         </div>
       </div>
 
-      <div className="uk-container uk-container-xlarge uk-padding">
+      <div className="uk-container uk-container-expand uk-padding">
         <h2>Imagenes Generadas</h2>
         {/* images generated */}
         <ul
@@ -179,15 +185,24 @@ function App() {
           {imgsGenerated.slice(0, 10).map((item, index) => {
             return (
               <li key={index}>
-                <a>
+                <div
+                  className="uk-inline-clip uk-transition-toggle"
+                  onClick={() => dowloadImage(item, "sample.jpg")}
+                >
                   <img src={item} alt="" />
-                </a>
+                  <div class="uk-position-center">
+                    <span
+                      class="uk-transition-fade"
+                      uk-icon="icon: download; ratio: 4"
+                    ></span>
+                  </div>
+                </div>
               </li>
             );
           })}
-        </ul>{" "}
+        </ul>
         <button
-          className="uk-button uk-button-danger"
+          className="uk-button arti-button-clear"
           onClick={() => {
             setImgsGenerated([]), setImgGenerated("");
           }}

@@ -13,3 +13,6 @@ export const randomImages = [
   "https://images6.alphacoders.com/690/690381.jpg",
   "https://images4.alphacoders.com/692/692423.jpg",
 ];
+
+export const imagendefault =
+  "https://static.fotor.com/app/features/static/media/ai-image-no-task.861133f7.jpg";
